@@ -40,13 +40,7 @@ for i in range(len(creditcard_df.columns)):
 fig = plt.tight_layout()
 st.pyplot(fig)
 
-st.header("Lets plot the corelation Matrix")
 
-
-correlations = creditcard_df.corr()
-f = plt.figure(figsize = (20,10))
-f = sns.heatmap(correlations, annot = True)
-st.pyplot(f)
 
 scaler = StandardScaler()
 creditcard_df_scaled = scaler.fit_transform(creditcard_df)
