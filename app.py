@@ -32,21 +32,21 @@ st.header("Lets study the data more thoroughly using subplots")
 
 
 
-plt.figure(figsize = (10,50))
+fig = plt.figure(figsize = (10,50))
 for i in range(len(creditcard_df.columns)):
     plt.subplot(17,1,i+1)
     sns.distplot(creditcard_df[creditcard_df.columns[i]], kde_kws={'color':'b', 'lw':5, 'label':'KDE'}, hist_kws={'color':'g'})
     plt.title(creditcard_df.columns[i])
-
-st.write(plt.tight_layout())
+fig = plt.tight_layout()
+st.write(fig)
 
 st.header("Lets plot the corelation Matrix")
 
 
 correlations = creditcard_df.corr()
-
 f, ax = plt.subplots(figsize = (20,10))
-st.write(sns.heatmap(correlations, annot = True))
+f = sns.heatmap(correlations, annot = True)
+st.write(f)
 
 scaler = StandardScaler()
 creditcard_df_scaled = scaler.fit_transform(creditcard_df)
@@ -63,7 +63,8 @@ for i in range_values:
 
 plt.xlabel('no. of clusters')
 plt.ylabel('error')
-st.write(plt.plot(scores_1, 'bx-'))
+x = plt.plot(scores_1, 'bx-')
+st.write(x)
 
 st.header("As interpreted from fig. We will take 8 as our value of k")
 st.subheader("Lets apply kmeans with k = 8 ")
@@ -94,7 +95,8 @@ for i in creditcard_df.columns:
         cluster = creditcard_df_cluster[creditcard_df_cluster['cluster'] ==j]
         cluster[i].hist(bins = 20)
         plt.title('{}  \nCluster {}'.format(i,j))
-st.write(plt.show)
+b = plt.show
+st.write(b)
 
 st.header("Lets Apply PCA to obtain a 2d plot")
 
@@ -108,7 +110,8 @@ pca_df = pd.concat([pca_df,pd.DataFrame({'cluster':labels})], axis =1)
 plt.figure(figsize=(10,10))
 
 f, ax = sns.scatterplot(x='pca1', y='pca2', hue = 'cluster', data = pca_df, palette = ['red','green','blue','pink','yellow','purple','gray','black'])
-st.write(plt.show())
+c = plt.show()
+st.write(c)
 
 
 
