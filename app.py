@@ -44,7 +44,7 @@ st.header("Lets plot the corelation Matrix")
 
 
 correlations = creditcard_df.corr()
-f, ax = plt.subplots(figsize = (20,10))
+f = plt.figure(figsize = (20,10))
 f = sns.heatmap(correlations, annot = True)
 st.pyplot(f)
 
