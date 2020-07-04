@@ -34,11 +34,11 @@ st.header("Lets study the data more thoroughly using subplots")
 
 fig = plt.figure(figsize = (10,50))
 for i in range(len(creditcard_df.columns)):
-    plt.subplot(17,1,i+1)
-    sns.distplot(creditcard_df[creditcard_df.columns[i]], kde_kws={'color':'b', 'lw':5, 'label':'KDE'}, hist_kws={'color':'g'})
-    plt.title(creditcard_df.columns[i])
+    fig = plt.subplot(nrows=17,ncls=1)
+    fig = sns.distplot(creditcard_df[creditcard_df.columns[i]], kde_kws={'color':'b', 'lw':5, 'label':'KDE'}, hist_kws={'color':'g'})
+    fig = plt.title(creditcard_df.columns[i])
 fig = plt.tight_layout()
-st.write(fig)
+st.pyplot(fig)
 
 st.header("Lets plot the corelation Matrix")
 
@@ -46,7 +46,7 @@ st.header("Lets plot the corelation Matrix")
 correlations = creditcard_df.corr()
 f, ax = plt.subplots(figsize = (20,10))
 f = sns.heatmap(correlations, annot = True)
-st.write(f)
+st.pyplot(f)
 
 scaler = StandardScaler()
 creditcard_df_scaled = scaler.fit_transform(creditcard_df)
@@ -61,15 +61,15 @@ for i in range_values:
     kmeans.fit(creditcard_df_scaled)
     scores_1.append(kmeans.inertia_)
 
-plt.xlabel('no. of clusters')
-plt.ylabel('error')
+x = plt.xlabel('no. of clusters')
+x = plt.ylabel('error')
 x = plt.plot(scores_1, 'bx-')
-st.write(x)
+st.pyplot(x)
 
 st.header("As interpreted from fig. We will take 8 as our value of k")
 st.subheader("Lets apply kmeans with k = 8 ")
 
-kmeans = KMeans(7)
+kmeans = KMeans(8)
 kmeans.fit(creditcard_df_scaled)
 labels = kmeans.labels_
 
@@ -89,14 +89,13 @@ creditcard_df_cluster = pd.concat([creditcard_df, pd.DataFrame({'cluster':labels
 st.header("Lets see how each varible varies in each Cluster")
 
 for i in creditcard_df.columns:
-    plt.figure(figsize= (35, 5))
+    b=plt.figure(figsize= (35, 5))
     for j in range(7):
-        plt.subplot(1,7,j+1)
+        b=plt.subplot(nrows=1,ncols=7,j+1)
         cluster = creditcard_df_cluster[creditcard_df_cluster['cluster'] ==j]
-        cluster[i].hist(bins = 20)
-        plt.title('{}  \nCluster {}'.format(i,j))
-b = plt.show
-st.write(b)
+        b=cluster[i].hist(bins = 20)
+        b=plt.title('{}  \nCluster {}'.format(i,j))
+st.pyplot(b)
 
 st.header("Lets Apply PCA to obtain a 2d plot")
 
@@ -107,11 +106,11 @@ pca_df = pd.DataFrame(data = principal_comp, columns = ['pca1', 'pca2'])
 
 pca_df = pd.concat([pca_df,pd.DataFrame({'cluster':labels})], axis =1)
 
-plt.figure(figsize=(10,10))
+c=plt.figure(figsize=(10,10))
 
-f, ax = sns.scatterplot(x='pca1', y='pca2', hue = 'cluster', data = pca_df, palette = ['red','green','blue','pink','yellow','purple','gray','black'])
-c = plt.show()
-st.write(c)
+c, ax = sns.scatterplot(x='pca1', y='pca2', hue = 'cluster', data = pca_df, palette = ['red','green','blue','pink','yellow','purple','gray','black'])
+
+st.pyplot(c)
 
 
 
