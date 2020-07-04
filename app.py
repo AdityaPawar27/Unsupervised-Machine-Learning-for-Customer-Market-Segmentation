@@ -91,7 +91,7 @@ st.header("Lets see how each varible varies in each Cluster")
 for i in creditcard_df.columns:
     b=plt.figure(figsize= (35, 5))
     for j in range(7):
-        b=plt.subplot(nrows=1,ncols=7,j+1)
+        b=plt.subplot(nrows=1,ncols=7,)
         cluster = creditcard_df_cluster[creditcard_df_cluster['cluster'] ==j]
         b=cluster[i].hist(bins = 20)
         b=plt.title('{}  \nCluster {}'.format(i,j))
