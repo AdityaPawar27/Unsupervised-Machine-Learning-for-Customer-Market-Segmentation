@@ -19,9 +19,12 @@ st.markdown("This application is a Streamlit dashboard that can be used "
             "using K-Means Algorithm")
 
 @st.cache(persist=True)
+
 if st.sidebar.checkbox("Show Raw Data", False):
     st.subheader('Raw Data')
     st.write(data = pd.read_csv(DATA_URL))
+
+
 creditcard_df = pd.read_csv(DATA_URL)
 creditcard_df.loc[(creditcard_df['MINIMUM_PAYMENTS'].isnull() == True),'MINIMUM_PAYMENTS'] = creditcard_df['MINIMUM_PAYMENTS'].mean()
 creditcard_df.loc[(creditcard_df['CREDIT_LIMIT'].isnull() == True),'CREDIT_LIMIT'] = creditcard_df['CREDIT_LIMIT'].mean()
