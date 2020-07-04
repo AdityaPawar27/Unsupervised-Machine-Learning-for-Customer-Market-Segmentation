@@ -34,7 +34,7 @@ st.header("Lets study the data more thoroughly using subplots")
 
 fig = plt.figure(figsize = (10,50))
 for i in range(len(creditcard_df.columns)):
-    fig = plt.subplot(nrows=17,ncls=1)
+    fig = plt.subplot(17,1,i+1)
     fig = sns.distplot(creditcard_df[creditcard_df.columns[i]], kde_kws={'color':'b', 'lw':5, 'label':'KDE'}, hist_kws={'color':'g'})
     fig = plt.title(creditcard_df.columns[i])
 fig = plt.tight_layout()
@@ -90,8 +90,8 @@ st.header("Lets see how each varible varies in each Cluster")
 
 for i in creditcard_df.columns:
     b=plt.figure(figsize= (35, 5))
-    for j in range(7):
-        b=plt.subplot(nrows=1,ncols=7,)
+    for j in range(8):
+        b=plt.subplot(1,8,j+1)
         cluster = creditcard_df_cluster[creditcard_df_cluster['cluster'] ==j]
         b=cluster[i].hist(bins = 20)
         b=plt.title('{}  \nCluster {}'.format(i,j))
